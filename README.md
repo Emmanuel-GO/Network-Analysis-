@@ -572,29 +572,249 @@ Visuals: ```plt.bar()```, ```nx.spring_layout()```, ```ax.scatter()```
 - Visuals via bar and network graph.
 
 ### 7. Strengths
-Efficient degree calculation with ```groupby()```.
+Efficient degree calculation with ```groupby()``` for degree calculation is faster than iterating through nodes.
 
 Scalable visual approach using subgraphs.
 
-Clear insight into network structure.
+**Clear insight into network structure:** The bar chart and network graph provide clear and intuitive insights into the distribution of broken links and orphan pages.
+
+## Method Applied in Research Ǫuestion 5 
+
+Which product groups have the best- selling products? - To determine which product groups, have the best-selling products, we can analyze the SalesRank distribution across different product groups. Since a lower SalesRank indicates better sales, we can compute the average SalesRank per Group and identify which groups tend to have the best-performing products.
+
+- Technique:
+  - SalesRank is converted to numeric using ```pd.to_numeric()```, and missing values are dropped using ```df.dropna()```.
+  - The Similar column, which contains lists of similar products, is exploded into individual rows using ```df.explode()```. This creates a row for each similar product pair, which is necessary for constructing the network.
+
+### SalesRank Analysis
+ 
+- **Method**: The average SalesRank is computed for each product group to identify the best-selling groups.
+- Technique:
+  - The ```groupby()``` function is used to group the data by Group and compute the mean SalesRank for each group.
+  - The results are sorted by SalesRank to rank the product groups from best- selling ```(lowest SalesRank)``` to worst-selling ```(highest SalesRank)```.
+
+### Product Similarity Network Construction
+- Method: A directed graph ```(DiGraph)``` is constructed to represent product similarities.
+- Technique:
+  - The graph is built using the ASIN ```(product identifier)``` and Similar ```(similar products)``` columns.
+  - The ```nx.from_pandas_edgelist()``` function is used to create the graph from the exploded DataFrame.
+  - A subgraph of 500 nodes is sampled for visualization to make the network graph manageable and interpretable.
+
+### Visualization
+
+Two types of visualizations are created:
+
+a.***Bar Chart**
+- **Method**: A bar chart is used to compare the average SalesRank across product groups.
+- **Technique**:
+  - The ```sns.barplot()``` function from the Seaborn library is used to create bar charts.
+ - The ```x-axis``` represents the average SalesRank (lower is better), and the y-axis represents the product groups.
+ - The hue parameter is used to color the bars by product group, and the palette parameter ensures consistent coloring.
+   
+b **Network Graph**
+- Method: A network graph is used to visualize the product similarity network.
+- Technique:
+  - The ```nx.spring_layout()``` function is used to compute the node positions for the subgraph. This layout algorithm arranges nodes in a way that minimizes edge crossings and makes the graph visually appealing.
+   - The ```nx.draw()``` function is used to draw the network graph, with parameters such as node_size, edge_color, and alpha to control the appearance ofnodes and edges.
+   - The graph is displayed without labels (with_labels=False) to avoid clutter.
+
+### Key Algorithms and Functions Used
+
+- Data Preprocessing:
+  - pd.to_numeric(): Converts SalesRank to numeric.
+  - df.dropna(): Drops rows with missing values.
+  - df.explode(): Expands the Similar column into individual rows.
+- SalesRank Analysis:
+  - df.groupby(): Groups the data by Group and computes the mean SalesRank.
+  - df.sort_values(): Sorts the results by SalesRank.
+- Network Construction:
+   - nx.from_pandas_edgelist(): Creates a directed graph from the exploded DataFrame.
+   - G.subgraph(): Creates a subgraph of 500 nodes for visualization.
+   - Visualization:
+   - sns.barplot(): Creates a bar chart to compare average SalesRank across product groups.
+    - nx.spring_layout(): Computes node positions for the network graph.
+  - nx.draw(): Draws the network graph.
+
+### Summary of Methods
+__The analysis uses the following methods__:
+1.	Data Preprocessing: Cleaning and preparing the dataset for analysis.
+2.	SalesRank Analysis: Computing the average SalesRank for each product group.
+3.	Network Construction: Building a direct graph to represent product similarities.
+4.	Visualization:
+  -  Creating a bar chart to compare average SalesRank across product groups.
+   -  Creating a network graph to visualize the product similarity network.
+Do similar products tend to have close SalesRanks? - To analyze whether similar products tend to have close SalesRanks, we can compute the SalesRank difference between connected products in the network and visualize their correlation
+
+
+## Method Applied in Research Question 6
+### Do similar products tend to have close SalesRanks?
+To determine whether similar products have close SalesRanks, the absolute difference in SalesRank is calculated between connected products, and their relationship is analyzed using correlation and visualization.
+
+- **Data Preprocessing**
+  - Technique:
+Convert ```SalesRank``` to numeric:
+```
+df["SalesRank"] = pd.to_numeric(df["SalesRank"], errors='coerce')
+```
+- Remove rows with missing values:
+
+```
+df.dropna(subset=["SalesRank"], inplace=True)
+```
+- Expand the ```Similar``` column into separate rows:
+
+```
+df = df.explode("Similar")
+```
+
+### SalesRank Differences
+- **Method**: Compute the absolute difference in ```SalesRank``` between products and their similar counterparts.
+
+- **Technique**:
+    - Merge product and similar product ```SalesRank``` values:
+```
+df_merged = df.merge(df, left_on="ASIN", right_on="Similar", suffixes=("", "_Similar"))
+```
+- Calculate absolute difference:
+```
+df_merged["SalesRank_Diff"] = abs(df_merged["SalesRank"] - df_merged["SalesRank_Similar"])
+```
+
+### Correlation Analysis
+- **Method**: Assess the relationship using Spearman and Pearson correlation.
+
+- **Technique**:
+```
+from scipy.stats import spearmanr, pearsonr
+
+spearman_corr, _ = spearmanr(df_merged["SalesRank"], df_merged["SalesRank_Similar"])
+pearson_corr, _ = pearsonr(df_merged["SalesRank"], df_merged["SalesRank_Similar"])
+```
+
+### Product Similarity Network Construction
+- **Method**: Create a directed graph to represent similar product connections.
+
+- **Technique**:
+```
+G = nx.from_pandas_edgelist(df, source="ASIN", target="Similar", create_using=nx.DiGraph())
+subgraph = G.subgraph(random.sample(G.nodes(), 500))
+```
+
+### Visualization
+Two types of visualizations are created:
+a.**Histogram**
+- **Method**: A histogram is used to visualize the distribution of SalesRank differences.
+- **Technique**:
+  - The sns.histplot() function from the Seaborn library is used to create the histogram.
+  - The x-axis represents the SalesRank differences, and the y-axis represents the frequency.
+b.	Network Graph
+- **Method**: A network graph is used to visualize the product similarity network.
+- **Technique**:
+  - ``The nx.spring_layout()`` function is used to compute the node positions for the subgraph.
+ - The ```nx.draw()``` function is used to draw the network graph, with parameters such as node_size, edge_color, and alpha to control the appearance of nodes and edges.
+
+### Key Algorithms and Functions Used
+- Data Preprocessing:
+  - pd.to_numeric(): Converts SalesRank to numeric.
+  - df.dropna(): Drops rows with missing values.
+ - df.explode(): Expands the Similar column into individual rows.
+- SalesRank Differences:
+
+   - df.merge(): Combines SalesRank values for each product and its similar products.
+  - abs(): Computes the absolute difference in SalesRank.
+- Correlation Analysis:
+  - spearmanr(): Computes Spearman correlation.
+- pearsonr(): Computes Pearson correlation.
+- Network Construction:
+  - nx.from_pandas_edgelist(): Creates a directed graph from the exploded DataFrame.
+ - G.subgraph(): Creates a subgraph of 500 nodes for visualization.
+- Visualization:
+  - sns.histplot(): Creates a histogram to visualize the distribution of SalesRank differences.
+  - nx.spring_layout(): Computes node positions for the network graph.
+ - nx.draw(): Draws the network graph.
+
+### Summary of Methods
+The analysis uses the following methods:
+1.	Data Preprocessing: Cleaning and preparing the dataset for analysis.
+2.	SalesRank Differences: Computing the absolute difference in SalesRank between similar products.
+3.	Correlation Analysis: Computing Spearman and Pearson correlations to assess the relationship between SalesRank differences and their order in the dataset.
+4.	Network Construction: Building a direct graph to represent product similarities.
+5.	Visualization:
+o	Creating a histogram to visualize the distribution of SalesRank differences.
+o	Creating a network graph to visualize the product similarity network.
+
+
+
+# 🔍 Research Findings & Insights
+
+## 📌 Research Question
+**How does the removal of low-degree nodes (web pages with very few links) affect the overall connectivity and robustness of the web network?**
+
+---
+
+## 📝 Introduction
+
+This report analyzes the impact of removing low-degree nodes (nodes with a degree of 2 or less) from a directed network built using the `amazon_network_data.csv` dataset. The analysis focuses on changes in the following network properties:
+
+* Size of the Largest Connected Component  
+* Average Path Length  
+* Network Diameter  
+
+---
+
+## ⚙️ Methodology
+
+1. **Graph Construction**  
+   * A directed graph (`DiGraph`) was created using the `FromNodeId` and `ToNodeId` columns.
+
+2. **Low-Degree Node Removal**  
+   * Nodes with a total degree of 2 or less were identified and removed from the graph.
+
+3. **Network Properties Measured**  
+   * **Largest Connected Component (LCC):** Size of the largest weakly connected component.  
+   * **Average Path Length:** Computed within the Largest Strongly Connected Component (LSCC).  
+   * **Network Diameter:** Measured within the LSCC.
+
+4. **Visualization**  
+   * A bar chart was generated to compare the size of the largest connected component before and after the removal of low-degree nodes.
+
+---
+
+## 📊 Findings
+
+### 🔹 Original Network Properties
+
+* **Largest Component Size:** 334,846 nodes  
+* **Average Path Length (LSCC):** 0.0000  
+* **Network Diameter (LSCC):** 0  
+
+**Interpretation:**  
+The zero values for average path length and diameter indicate that the LSCC may consist of a single node or a set of nodes without any paths between them.  
+This suggests a highly fragmented graph structure, where path-based metrics are not meaningful.
+
+---
+
+### 🔹 After Removing Low-Degree Nodes
+
+* **Largest Component Size:** 268,364 nodes  
+* **Average Path Length (LSCC):** 0.0000  
+* **Network Diameter (LSCC):** 0  
+
+**Interpretation:**  
+The size of the largest connected component decreased significantly, confirming the impact of low-degree node removal.  
+However, the average path length and diameter remained unchanged due to the sparse connectivity and fragmented structure of the graph.
+
+---
 
 
 
 
 
+## 📈 Visual Summary
 
+*Bar chart was generated to visually compare the size of the largest connected component before and after the removal of low-degree nodes.*
 
-
-
-
-
-
-
-
-
-
-
-
+---
 
 
 
