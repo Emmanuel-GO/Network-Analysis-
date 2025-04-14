@@ -1187,6 +1187,124 @@ Further exploration could include mapping these node IDs to actual product names
 - **Explore correlations** between Betweenness Centrality and metrics like **Sales Rank** or **PageRank**.
 - **Visualize** these top bridge products in a focused subgraph to study their connectivity in detail.
 
+![](10graph.png)
+
+---
+
+---
+
+![](10chart.png)
+
+---
+
+## Visualization
+* A **bar plot** visualizes the Betweenness Centrality of the top 10 bridge products
+* **X-axis**: Product Node ID  
+* **Y-axis**: Betweenness Centrality value  
+* **Key observation**: Node `86976` shows the highest centrality (tallest bar), establishing a clear ranking
+
+
+
+## Discussion
+
+### 1. Role of Bridge Products
+* Critical for maintaining **network connectivity** and **product flow**
+* Act as "bottlenecks" - disruption would significantly impact:
+  * Network structure
+  * Information propagation
+  * Recommendation system effectiveness
+
+### 2. Betweenness Centrality Values
+* Values are relatively small (~1e-6 scale), which is:
+  * Expected in large networks
+  * Result of distribution across thousands of nodes
+* Despite small absolute values, the **relative ranking** provides actionable insights
+
+### 3. Potential Applications
+* **Targeted Marketing**:
+  * Prioritize bridge products in campaigns
+  * Leverage their network position for maximum influence
+* **Inventory Management**:
+  * Ensure high availability of bridge products
+  * Maintain smooth customer journeys
+* **Network Robustness**:
+  * Identify critical vulnerabilities
+  * Improve system resilience
+
+## Recommendations
+
+### 1. Further Analysis
+* **Cross-metric investigation**:
+  * Correlate with Sales Rank, PageRank
+  * Compare with degree centrality
+* **Temporal analysis**:
+  * Track centrality changes over time
+  * Identify seasonal patterns
+
+### 2. Causal Inference
+* **Controlled experiments**:
+  * Test impact of promoting bridge products
+  * Measure effects on:
+    * Sales conversion
+    * Customer engagement
+    * Network metrics
+
+## Conclusion
+The analysis identifies the **top 10 bridge products** in the Amazon network based on Betweenness Centrality. These products play a critical role in maintaining network connectivity and facilitating product flow. The results highlight the importance of **Node 86G76** as the most influential bridge product, followed by **Node 23G327** and others. While the Betweenness Centrality values are small, the ranking provides valuable insights into the relative importance of these products. Further analysis and data enrichment are recommended to deepen the understanding of these bridge products and their impact on the network.
+
+
+# Best-Selling Product Groups and Product Similarity Network Analysis
+
+## Introduction
+This report analyzes the best-selling product groups and the product similarity network in the Amazon dataset. The analysis focuses on identifying product groups with the best sales performance (based on average *SalesRank*) and visualizing the network of product similarities. The results provide insights into which product groups are most popular and how products are connected based on similarity.
+
+## Methodology
+
+### 1. Data Preprocessing:
+* SalesRank is converted to *numeric*, and missing values are dropped.
+* The *Similar* column is exploded to create edges for the similarity network.
+
+### 2. SalesRank Analysis:
+* The average *SalesRank* is computed for each product group.
+* Lower *SalesRank* values indicate better sales performance.
+
+### 3. Product Similarity Network:
+* A directed graph (**DiGraph**) is constructed using the *ASIN* and *Similar* columns.
+* A subgraph of 500 nodes is sampled for visualization.
+
+### 4. Visualization:
+* A **bar chart** is used to compare the average *SalesRank* across product groups.
+* A **network graph** is used to visualize the product similarity network.
+
+![](BestsellDoub.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
