@@ -1275,13 +1275,86 @@ This report analyzes the best-selling product groups and the product similarity 
 ### 4. Visualization:
 * A **bar chart** is used to compare the average *SalesRank* across product groups.
 * A **network graph** is used to visualize the product similarity network.
+---
+![](Bestselldoub.png)
 
-![](BestsellDoub.png)
+---
+
+## Findings
+
+### 1. Best-Selling Product Groups:
+* The average *SalesRank* for each product group is as follows (lower values indicate better sales performance):
+
+| Product Group | Average SalesRank |
+|---------------|-------------------|
+| Software      | ~10,000           |
+| Video Games   | ~20,000           |
+| Toy           | ~30,000           |
+| DVD           | ~40,000           |
+| Video         | ~50,000           |
+| Music         | ~60,000           |
+| Book          | ~70,000           |
+
+### 2. Interpretation:
+* *Software* has the lowest average SalesRank, indicating it is the best-selling product group.
+* *Video Games* and *Toys* also perform well.
+* *Books* have the highest average SalesRank, indicating lower sales performance.
+
+### 3. Product Similarity Network:
+* The **network graph** visualizes the connections between products based on similarity.
+* The subgraph of 500 nodes shows a **dense network of connections**, indicating that many products are linked through similarity.
+* The network structure suggests that products within the same group (e.g., *Software*, *Video Games*) are highly interconnected.
+
+## Discussion
+
+### 1. Best-Selling Product Groups:
+* *Software* and *Video Games* are the top-performing product groups, likely due to high demand and frequent updates.
+* *Books* have the lowest sales performance, which may reflect lower demand or competition from digital alternatives (e.g., e-books).
+
+### 2. Product Similarity Network:
+* The **dense network of connections** indicates that Amazon's recommendation system effectively links similar products.
+* The **high interconnectivity** within product groups (e.g., *Software*, *Video Games*) suggests that customers often explore related products within the same category.
+
+## Recommendations
+
+### 1. Further Analysis:
+* Investigate the relationship between *SalesRank* and other metrics (e.g., price, reviews, product category).
+* Perform a **temporal analysis** to understand how sales performance and product similarity evolve over time.
+
+### 2. Marketing Strategies:
+* Focus marketing efforts on **top-performing product groups** (e.g., *Software*, *Video Games*).
+* Use the **product similarity network** to improve **cross-selling** and **up-selling** strategies.
+
+## Conclusion
+The analysis identifies *Software* and *Video Games* as the **best-selling product groups**, while *Books* show the **lowest sales performance**. The **product similarity network** reveals a **dense web of connections**, indicating effective product recommendations within the same category. Further analysis and data enrichment are recommended to deepen the understanding of sales performance and product similarity.
 
 
 
+# SalesRank Differences Between Similar Products
 
+## Introduction
+This report analyzes the *SalesRank* differences between similar products and visualizes the product similarity network in the Amazon dataset. The analysis focuses on understanding how similar products differ in terms of sales performance (*SalesRank*) and how products are connected based on similarity. The results provide insights into the relationship between product similarity and sales performance.
 
+## Methodology
+
+### 1. Data Preprocessing:
+* *SalesRank* is converted to **numeric**, and missing values are dropped.
+* The *Similar* column is **exploded** to create edges for the similarity network.
+
+### 2. SalesRank Differences:
+* The **absolute difference** in *SalesRank* between similar products is computed.
+* The **distribution** of these differences is visualized using a **histogram**.
+
+### 3. Correlation Analysis:
+* **Spearman** and **Pearson** correlations are computed to assess the relationship between *SalesRank* differences and their order in the dataset.
+
+### 4. Product Similarity Network:
+* A **directed graph (DiGraph)** is constructed using the *ASIN* and *Similar* columns.
+* A **subgraph of 500 nodes** is sampled for visualization.
+
+### 5. Visualization:
+* A **histogram** is used to visualize the distribution of *SalesRank* differences.
+* A **network graph** is used to visualize the product similarity network.
 
 
 
