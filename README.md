@@ -806,7 +806,9 @@ However, the average path length and diameter remained unchanged due to the spar
 
 ---
 
-![](BRAR.PNG)
+![](BRAR.png)
+
+---
 
 ## 📈 Visual Summary
 
@@ -814,6 +816,123 @@ However, the average path length and diameter remained unchanged due to the spar
 
 ---
 
+## 🧠 Interpretation
+
+- **Size Reduction:**  
+  Removing low-degree nodes reduced the size of the largest weakly connected component by approximately **20%** (from **334,849** to **268,364** nodes). This indicates that **low-degree nodes play a significant role in maintaining network connectivity**.
+
+- **Unchanged Path Metrics:**  
+  The **average path length** and **network diameter** remained at **0**, suggesting that the **largest strongly connected component (LSCC)** was not significantly affected.  
+  This reinforces the idea that the LSCC is either **very small or poorly connected**.
+
+---
+
+## 📊 Visualization Summary
+
+- **Bar Chart Insight:**  
+  The bar chart shows a **clear reduction** in the size of the largest connected component after removing low-degree nodes.
+
+  - **Before Removal:** Largest component size was **334,849**.  
+  - **After Removal:** Component size dropped to **268,364**.
+
+---
+
+## 💬 Discussion
+
+### 1. Impact of Low-Degree Nodes
+- **Critical Role in Connectivity:**  
+  Low-degree nodes act as **bridges or connectors**, crucial for preserving overall network cohesion.
+- **Minimal Impact on Core Structure:**  
+  Despite their removal, the **LSCC remained stable**, indicating **low-degree nodes are less influential** in the network’s core.
+
+### 2. Fragmentation of the Network
+- **Evidence of Fragmentation:**  
+  The **0 values** for average path length and diameter imply a **highly fragmented** network.
+- **Possible Causes:**  
+  Fragmentation may stem from:
+  * The dataset’s inherent structure (e.g., many isolated nodes)
+  * Use of a **directed graph**, which tends to disconnect more easily than an undirected graph.
+
+### 3. Limitations
+- **Dataset Quality:**  
+  If the dataset contains numerous isolated or small disconnected components, it may not represent a well-connected network.
+- **Graph Directionality:**  
+  A **directed graph** model increases the likelihood of disconnection, potentially skewing path-based analyses.
+
+---
+
+## 🔍 Recommendations
+
+### 1. Further Analysis
+- Examine the **node degree distribution** to better understand the importance of low-degree nodes.
+- Perform **community detection** to uncover clusters or sub-networks with higher connectivity.
+
+### 2. Alternative Approaches
+- **Convert to an Undirected Graph** for better insight into overall connectivity and traversal metrics.
+- **Compare the impact of removing high-degree (hub) nodes** to see how critical they are to the network structure.
+
+---
+
+## 🧾 Conclusion
+
+Removing low-degree nodes significantly **reduced the size** of the largest weakly connected component, **highlighting their importance** in maintaining connectivity.  
+However, the **core of the network (LSCC)** was **not impacted**, showing that these nodes have **limited influence on central cohesion**.  
+The network’s **high fragmentation** emphasizes the need for **additional analysis and preprocessing** to gain deeper and more meaningful insights.
+
+
+## 🔍 Analyze the Relationship Between Sales Rank and Connectivity
+
+### 📘 Introduction
+
+This report analyzes the relationship between **Sales Rank** and **Degree Centrality** in a directed network constructed from the `amazon_network_data.csv` dataset. The goal is to understand how the **centrality of products (nodes)** correlates with their **sales performance**, as indicated by their Sales Rank.
+
+The strength of the relationship is quantified using **Spearman** and **Pearson correlation coefficients**, and results are visualized using a **scatter plot**.
+
+---
+
+### 🧪 Methodology
+
+1. **Dataset**  
+   - The dataset contains **directed edges** between products and their associated **Sales Rank**.
+
+2. **Graph Construction**  
+   - A **directed graph (DiGraph)** was built using the `FromNodeId` and `ToNodeId` columns.
+
+3. **Centrality Measures**
+   - **Degree Centrality**: Number of direct connections a node has.
+   - **Betweenness Centrality**: Measures how often a node appears on the shortest path between other nodes.
+   - **PageRank**: Reflects the relative importance of a node within the network structure.
+
+4. **Correlation Analysis**
+   - **Spearman Correlation**: Assesses **rank-based** association between Sales Rank and centrality.
+   - **Pearson Correlation**: Evaluates **linear relationship** between Sales Rank and centrality.
+
+5. **Visualization**
+   - A **scatter plot** was used to display the relationship between **Sales Rank** and **Degree Centrality**.
+
+---
+
+### 📊 Findings
+
+#### 1. Correlation Analysis
+
+- **Spearman Correlation (Rank-Based):** `-0.5557`
+  - Indicates a **moderate negative correlation**.
+  - As **Degree Centrality increases**, **Sales Rank tends to decrease** (i.e., better sales performance since a lower rank is better).
+
+- **Pearson Correlation (Linear):** `-0.2872`
+  - Shows a **weak negative linear relationship**.
+  - The linear relationship is **less pronounced** compared to the rank-based correlation.
+
+---
+
+### ✅ Interpretation
+
+- Products with **more connections** (higher degree centrality) generally **perform better in sales**, as seen from the negative correlations.
+- The **Spearman result** suggests that **ranking-based associations** are stronger than linear patterns.
+- This implies that **network position** plays a meaningful role in **sales performance**, even if not perfectly linear.
+
+---
 
 
 
