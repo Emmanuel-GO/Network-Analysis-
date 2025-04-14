@@ -806,9 +806,7 @@ However, the average path length and diameter remained unchanged due to the spar
 
 ---
 
-
-
-
+![](BRAR.PNG)
 
 ## 📈 Visual Summary
 
