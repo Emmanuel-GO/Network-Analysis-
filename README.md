@@ -8,6 +8,7 @@ We will investigate key aspects of the network using advanced methodologies such
 The objective of this study is to conduct an in-depth network analysis of the Amazon product co-purchasing network dataset from the Stanford Large Network Dataset
 Collection. This dataset represents products as nodes and co-purchasing relationships as edges, providing valuable insights into product recommendations, influence, and category clustering.
 Using advanced network science techniques, this analysis aims to:
+
 📌 How does the removal of low-degree nodes (web pages with very few links) affect the overall connectivity and robustness of the web network?
 
 📌	Analyze the Relationship Between Sales Rank and Connectivity – Investigate the correlation between a product’s degree centrality and its Sales Rank to understand if highly connected products perform better in sales.
