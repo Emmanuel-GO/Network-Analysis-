@@ -745,14 +745,14 @@ o	Creating a network graph to visualize the product similarity network.
 
 
 
-# 🔍 Research Findings & Insights
+#  Research Findings & Insights
 
-## 📌 Research Question
+##  Research Question
 **How does the removal of low-degree nodes (web pages with very few links) affect the overall connectivity and robustness of the web network?**
 
 ---
 
-## 📝 Introduction
+##  Introduction
 
 This report analyzes the impact of removing low-degree nodes (nodes with a degree of 2 or less) from a directed network built using the `amazon_network_data.csv` dataset. The analysis focuses on changes in the following network properties:
 
@@ -762,7 +762,7 @@ This report analyzes the impact of removing low-degree nodes (nodes with a degre
 
 ---
 
-## ⚙️ Methodology
+## Methodology
 
 1. **Graph Construction**  
    * A directed graph (`DiGraph`) was created using the `FromNodeId` and `ToNodeId` columns.
@@ -780,9 +780,9 @@ This report analyzes the impact of removing low-degree nodes (nodes with a degre
 
 ---
 
-## 📊 Findings
+##  Findings
 
-### 🔹 Original Network Properties
+###  Original Network Properties
 
 * **Largest Component Size:** 334,846 nodes  
 * **Average Path Length (LSCC):** 0.0000  
@@ -794,7 +794,7 @@ This suggests a highly fragmented graph structure, where path-based metrics are 
 
 ---
 
-### 🔹 After Removing Low-Degree Nodes
+###  After Removing Low-Degree Nodes
 
 * **Largest Component Size:** 268,364 nodes  
 * **Average Path Length (LSCC):** 0.0000  
@@ -810,13 +810,13 @@ However, the average path length and diameter remained unchanged due to the spar
 
 ---
 
-## 📈 Visual Summary
+##  Visual Summary
 
 *Bar chart was generated to visually compare the size of the largest connected component before and after the removal of low-degree nodes.*
 
 ---
 
-## 🧠 Interpretation
+##  Interpretation
 
 - **Size Reduction:**  
   Removing low-degree nodes reduced the size of the largest weakly connected component by approximately **20%** (from **334,849** to **268,364** nodes). This indicates that **low-degree nodes play a significant role in maintaining network connectivity**.
@@ -827,7 +827,7 @@ However, the average path length and diameter remained unchanged due to the spar
 
 ---
 
-## 📊 Visualization Summary
+##  Visualization Summary
 
 - **Bar Chart Insight:**  
   The bar chart shows a **clear reduction** in the size of the largest connected component after removing low-degree nodes.
@@ -837,7 +837,7 @@ However, the average path length and diameter remained unchanged due to the spar
 
 ---
 
-## 💬 Discussion
+##  Discussion
 
 ### 1. Impact of Low-Degree Nodes
 - **Critical Role in Connectivity:**  
@@ -861,7 +861,7 @@ However, the average path length and diameter remained unchanged due to the spar
 
 ---
 
-## 🔍 Recommendations
+##  Recommendations
 
 ### 1. Further Analysis
 - Examine the **node degree distribution** to better understand the importance of low-degree nodes.
@@ -873,16 +873,16 @@ However, the average path length and diameter remained unchanged due to the spar
 
 ---
 
-## 🧾 Conclusion
+##  Conclusion
 
 Removing low-degree nodes significantly **reduced the size** of the largest weakly connected component, **highlighting their importance** in maintaining connectivity.  
 However, the **core of the network (LSCC)** was **not impacted**, showing that these nodes have **limited influence on central cohesion**.  
 The network’s **high fragmentation** emphasizes the need for **additional analysis and preprocessing** to gain deeper and more meaningful insights.
 
 
-## 🔍 Analyze the Relationship Between Sales Rank and Connectivity
+##  Analyze the Relationship Between Sales Rank and Connectivity
 
-### 📘 Introduction
+###  Introduction
 
 This report analyzes the relationship between **Sales Rank** and **Degree Centrality** in a directed network constructed from the `amazon_network_data.csv` dataset. The goal is to understand how the **centrality of products (nodes)** correlates with their **sales performance**, as indicated by their Sales Rank.
 
@@ -890,7 +890,7 @@ The strength of the relationship is quantified using **Spearman** and **Pearson 
 
 ---
 
-### 🧪 Methodology
+###  Methodology
 
 1. **Dataset**  
    - The dataset contains **directed edges** between products and their associated **Sales Rank**.
@@ -912,7 +912,7 @@ The strength of the relationship is quantified using **Spearman** and **Pearson 
 
 ---
 
-### 📊 Findings
+###  Findings
 
 #### 1. Correlation Analysis
 
@@ -926,7 +926,7 @@ The strength of the relationship is quantified using **Spearman** and **Pearson 
 
 ---
 
-### ✅ Interpretation
+###  Interpretation
 
 - Products with **more connections** (higher degree centrality) generally **perform better in sales**, as seen from the negative correlations.
 - The **Spearman result** suggests that **ranking-based associations** are stronger than linear patterns.
@@ -938,14 +938,14 @@ The strength of the relationship is quantified using **Spearman** and **Pearson 
 
 ---
 
-### 📌 Interpretation
+###  Interpretation
 
 - The **negative correlations** suggest that products with **higher connectivity** in the network tend to have **better sales performance** (lower Sales Rank).
 - The **Spearman correlation** is **stronger** than the Pearson correlation, indicating that the relationship is **better captured by rank-based measures** rather than linear ones.
 
 ---
 
-### 📉 Scatter Plot (Sales Rank vs. Degree Centrality)
+###  Scatter Plot (Sales Rank vs. Degree Centrality)
 
 - The scatter plot shows the **distribution of Sales Rank against Degree Centrality**.
 - Most data points are **clustered at lower values** of Degree Centrality, with a few **outliers at higher values**.
@@ -953,7 +953,7 @@ The strength of the relationship is quantified using **Spearman** and **Pearson 
 
 ---
 
-### 🧠 Discussion
+###  Discussion
 
 #### 1. Implications of Degree Centrality
 
@@ -971,7 +971,7 @@ The strength of the relationship is quantified using **Spearman** and **Pearson 
 
 ---
 
-### 💡 Recommendations
+###  Recommendations
 
 #### 1. Further Analysis
 
@@ -989,7 +989,7 @@ The strength of the relationship is quantified using **Spearman** and **Pearson 
 
 ---
 
-### 🧾 Conclusion
+###  Conclusion
 
 This analysis shows a **moderate negative correlation** between **Sales Rank** and **Degree Centrality**, suggesting that products with more connections in the network tend to perform better in terms of sales.
 
@@ -1000,7 +1000,7 @@ The **scatter plot confirms** this trend, with most points concentrated at lower
 
 
 
-## 🔍 Which Web Pages Have No Outgoing or Incoming Links?
+##  Which Web Pages Have No Outgoing or Incoming Links?
 
 ###  Introduction
 
@@ -1032,10 +1032,10 @@ The goal is to identify such nodes, visualize their distribution in a **sampled 
      - **Orphan pages** were colored **blue**.
 
 ---
-![](Double .png)
+![](Double1.png)
 
 ---
-### 📊 Findings
+###  Findings
 
 #### 1. Summary Statistics
 - **Total Nodes**: 334,852  
@@ -1052,13 +1052,13 @@ The goal is to identify such nodes, visualize their distribution in a **sampled 
 - **Broken Links**: 100  
 - **Orphan Pages**: 80  
 
-#### 📈 Visualization
+####  Visualization
 - **Bar Chart**: Highlights relative counts of broken vs orphan nodes.
 - **Network Graph**: Clearly shows red (broken) and blue (orphan) nodes.
 
 ---
 
-### 💬 Discussion
+###  Discussion
 
 #### 1. Broken Links
 - Nodes with no outgoing connections.
@@ -1082,12 +1082,12 @@ The goal is to identify such nodes, visualize their distribution in a **sampled 
 
 ---
 
-### ✅ Recommendations
+###  Recommendations
 
 #### 1. Further Analysis
 - Correlate broken links and orphan pages with:
-  - 📈 **Sales Rank**
-  - 🔁 **PageRank**
+  -  **Sales Rank**
+  - **PageRank**
 - Explore **temporal dynamics**: How do these issues evolve over time?
 
 #### 2. Network Optimization
@@ -1096,7 +1096,7 @@ The goal is to identify such nodes, visualize their distribution in a **sampled 
 
 ---
 
-### 🧠 Conclusion
+###  Conclusion
 
 - Identified **69,075 broken links** and **70,712 orphan pages** (~20% each).
 - These nodes may indicate **inefficiencies** or **missed opportunities** in the product recommendation system.
@@ -1107,7 +1107,7 @@ The goal is to identify such nodes, visualize their distribution in a **sampled 
 
 ---
 
-### 💡 Why Using a Subgraph Was Better
+###  Why Using a Subgraph Was Better
 
 1. **Scalability**: The full graph is too large for practical visualization.
 2. **Focus**: A subgraph captures essential features without overwhelming detail.
@@ -1119,13 +1119,13 @@ By leveraging a subgraph, this analysis strikes a balance between **depth of ins
 
 ## 🔗 Detecting Key Bridge Products in the Amazon Network
 
-### 🧾 Introduction
+###  Introduction
 
 This report identifies and analyzes the **top 10 bridge products** in the Amazon product co-purchasing network using **Betweenness Centrality**. Bridge products are key intermediaries in the network that lie on the **shortest paths between other nodes**, making them crucial for connectivity, recommendation flow, and product discovery.
 
 ---
 
-### 🧪 Methodology
+###  Methodology
 
 1. **Dataset**
    - Used `amazon_network_data.csv`, which contains directed edges between products represented by `FromNodeId` and `ToNodeId`.
@@ -1143,9 +1143,9 @@ This report identifies and analyzes the **top 10 bridge products** in the Amazon
 
 ---
 
-### 📊 Findings
+###  Findings
 
-#### 🏆 Top 10 Bridge Products
+####  Top 10 Bridge Products
 
 | NodeId | Betweenness Centrality |
 |--------|------------------------|
@@ -1160,7 +1160,7 @@ This report identifies and analyzes the **top 10 bridge products** in the Amazon
 | 360318 | 0.000002               |
 | 120937 | 0.000002               |
 
-#### 🔍 Interpretation
+####  Interpretation
 
 - These products lie on a **large number of shortest paths**, enabling them to act as **information and recommendation hubs**.
 - **Node 86976** has the highest Betweenness Centrality (0.000004), indicating it plays the most pivotal role in **bridging different parts of the network**.
@@ -1168,7 +1168,7 @@ This report identifies and analyzes the **top 10 bridge products** in the Amazon
 
 ---
 
-### 💬 Conclusion
+###  Conclusion
 
 This analysis highlights the top 10 **bridge products** in the Amazon co-purchasing network using Betweenness Centrality. These nodes act as **connectors between different product clusters**, making them ideal candidates for:
 
@@ -1180,7 +1180,7 @@ Further exploration could include mapping these node IDs to actual product names
 
 ---
 
-### 📈 Next Steps
+###  Next Steps
 
 - **Map Node IDs to Product Metadata** (titles, categories) to understand what makes these products influential.
 - **Explore correlations** between Betweenness Centrality and metrics like **Sales Rank** or **PageRank**.
@@ -1414,6 +1414,77 @@ This report analyzes the *SalesRank* differences between similar products and vi
 The analysis reveals that **similar products tend to have relatively close SalesRank values**, with some exceptions showing significant differences. The **near-zero correlations** indicate that *SalesRank* differences are not influenced by the **order of products** in the dataset. The **product similarity network** shows a **dense web of connections**, highlighting the effectiveness of Amazon’s recommendation system. Further **analysis and data enrichment** are recommended to deepen the understanding of these findings.
 
 
+# 📌 Conclusion & Future Recommendations
+
+## Summary of Key Insights
+
+### 1. Impact of Low-Degree Node Removal
+- Removing low-degree nodes significantly reduced the size of the **largest weakly connected component**, emphasizing their role in overall network connectivity.
+- The **largest strongly connected component** remained stable, showing these nodes are less central to the core network structure.
+
+### 2. SalesRank and Connectivity
+- A **moderate negative correlation** exists between Degree Centrality and SalesRank:
+  - **Spearman correlation**: `-0.5557`  
+  - **Pearson correlation**: `-0.2872`  
+- This implies that **highly connected products tend to perform better in sales**, and ranking-based relationships are more important than linear ones.
+
+### 3. Broken Links and Orphan Pages
+- Identified:
+  - `6,075` broken links (nodes with no outgoing edges)
+  - `70,712` orphan pages (nodes with no incoming edges)
+- These represent about **20% of the network**, potentially revealing inefficiencies or missing connections in Amazon’s recommendation system.
+
+### 4. Key Bridge Products
+- Top 10 bridge products were identified using **Betweenness Centrality**.
+- These nodes act as **inter-category connectors** and can be strategically used for **cross-category recommendations**.
+
+### 5. Best-Selling Product Groups
+- **Software, Video Games, and Toys** had the **lowest average SalesRank** (i.e., best-selling).
+- The **Books** category had the **highest average SalesRank**, indicating relatively lower sales performance.
+
+### 6. Similarity and SalesRank Differences
+- Similar products tend to have **closely ranked SalesRanks**.
+- Some pairs exhibit large differences, and **no strong correlation** was found between similarity order and SalesRank difference.
+- External factors like **price, reviews, promotions** may have greater influence on performance.
+
+---
+
+##  Future Work & Recommendations
+
+### 1. Incorporate Additional Attributes
+- Include **product price, reviews, customer sentiment**, and **ratings** for deeper analysis.
+- Perform **time-series analysis** to monitor how SalesRank and connectivity evolve.
+
+### 2. Improve Network Efficiency & Robustness
+- Reduce **broken links and orphan pages** to ensure better product linkage.
+- Apply **graph-based machine learning** models to predict missing links and enhance recommendations.
+
+### 3. Expand SalesRank Analysis
+- Study the impact of **pricing strategies, discount rates**, and **marketing campaigns** on SalesRank.
+- Use **causal inference techniques** to test if centrality improvements lead to increased sales.
+
+### 4. Enhance Product Recommendation Strategy
+- Use **key bridge products** to optimize **cross-category selling**.
+- Explore **multi-layered networks** (e.g., co-purchasing + review networks) for more refined recommendations.
+
+### 5. Optimize Visualization & Data Presentation
+- Implement **interactive visualizations** for exploring network structures and key product nodes.
+- Apply **clustering algorithms** (e.g., community detection) to identify product groups frequently purchased together.
+
+---
+
+## General Conclusion
+
+This network analysis of Amazon’s **co-purchasing product data** provided key insights into product **structure, connectivity**, and **sales performance** within the recommendation system.
+
+### Key Takeaways:
+- **Highly connected products** often have better SalesRank.
+- **Broken links and orphan pages** signal inefficiencies in recommendations.
+- **Bridge products** play an essential role in cross-category product visibility.
+- Best-selling categories: **Software, Video Games, Toys**.
+- External factors like **price, reviews**, and **promotions** heavily influence SalesRank, despite product similarity.
+
+By integrating richer product attributes, enhancing structural robustness, and refining strategies, businesses can significantly **boost their recommendation systems** and **sales outcomes** in e-commerce environments.
 
 
 
