@@ -185,27 +185,30 @@ To make this analysis meaningful, I had to merge these datasets using a commonid
 
 •	Columns Used → We selectively merge with only relevant attributes to keep the dataset manageable and focused.
 
-## **Method Applied in Research Ǫuestion 1** 
+## **🔍 Method Applied in Research Question 1** 
 
 How does the removal of low-degree nodes (web pages with very few links) affect the overall connectivity and robustness of the web
 network?
 
 **Graph Construction**
 
-•	**Method**: A directed graph (DiGraph) is constructed using the FromNodeId and ToNodeId columns from the dataset.
+•	**Method**: A directed graph ```(DiGraph)``` is constructed using the ```FromNodeId``` and ```ToNodeId``` columns from the dataset.
 
 •	**Technique**:
-1.The graph is built by adding edges between nodes using G.add_edges_from(edges).
-2.This represents a directed network, where edges have direction (from one node to another).
+1.The graph is built by adding edges between nodes using ```G.add_edges_from(edges)```.
+2.This represents a ***directed network**, where edges have direction (from one node to another).
 
 ## Identification of Low-Degree Nodes
 •	**Method**: Nodes with a degree of 2 or less are identified as low-degree nodes.
 
 •	**Technique**:
 
-o	The degree of each node is calculated using G.degree(node).
-
-o	A list of nodes with degree ≤ 2 is created using a list comprehension:
+   - Node degrees of each node is calculated using G.degree(node).
+   - 
+   - A list of nodes with degree ≤ 2 is created using a list comprehension:
+```
+low_degree_nodes = [node for node in G.nodes if G.degree(node) <= 2]
+```
 
 ## Network Properties Calculation
 
@@ -217,11 +220,15 @@ The following network properties are computed before and after the removal of lo
 
 ## Technique:
 
--	Weakly connected components are computed using nx.weakly_connected_components(G).
+-	Weakly connected components are computed using ```nx.weakly_connected_components(G)```.
 
--	The largest component is selected using max (..., key=len).
+-	The largest component is selected using
+```
+original_lcc = max(nx.weakly_connected_components(G), key=len)
+
+```
  
--	The size of the largest component is calculated using len(original_lcc).
+-	The size of the largest component is calculated using ```len(original_lcc)```.
 
 ### b.	Average Path Length
 
@@ -229,11 +236,20 @@ The following network properties are computed before and after the removal of lo
 
 •	**Technique**:
 
-o	Strongly connected components are computed using nx.strongly_connected_components(G).
+   - Strongly connected components are computed using ```nx.strongly_connected_components(G)```.
 
-o	The largest strongly connected component is selected using max (..., key=len).
+   - The largest strongly connected component is selected using 
+```
+scc = max(nx.strongly_connected_components(G), key=len)
+subgraph = G.subgraph(scc)
 
-o	The average shortest path length is computed using nx.average_shortest_path_length(subgraph).
+```
+
+   - The average shortest path length is computed using 
+```
+nx.average_shortest_path_length(subgraph)
+
+```
 
 ### c.	Network Diameter
 
@@ -241,50 +257,50 @@ o	The average shortest path length is computed using nx.average_shortest_path_le
 
 •	**Technique**:
 
-o	The diameter is computed using nx.diameter(subgraph).
+  - The diameter is computed using ```nx.diameter(subgraph)```.
 
-o	This measures the longest shortest path in the subgraph.
+  - This measures the longest shortest path in the subgraph.
 
-##	Removal of Low-Degree Nodes
+###	Removal of Low-Degree Nodes
 
 •	**Method**: Low-degree nodes are removed from the graph.
 
 •	**Technique**:
 
-o	Nodes are removed using G.remove_nodes_from(low_degree_nodes).
-o	This operation modifies the graph in-place, and the network properties are recalculated after removal.
+ - Nodes are removed using ```G.remove_nodes_from(low_degree_nodes)```.
+ - This operation modifies the graph in-place, and the network properties are recalculated after removal.
 
-## Visualization
+### Visualization
 
 •	**Method**: A bar chart is used to compare the size of the largest connected component before and after the removal of low-degree nodes.
 
 •	**Technique**:
 
-o	The matplotlib library is used to create bar charts.
+  - The matplotlib library is used to create bar charts.
 
-o	The x-axis represents the two states ("Before Removal" and "After Removal"), and the y-axis represents the size of the largest connected component.
+  - The x-axis represents the two states ("Before Removal" and "After Removal"), and the y-axis represents the size of the largest connected component.
 
 ## Key Algorithms and Functions Used
 
 •	**Weakly Connected Components**: nx.weakly_connected_components(G)
 
-o	Identifies components in a directed graph where nodes are connected if the graph is treated as undirected.
+ - Identifies components in a directed graph where nodes are connected if the graph is treated as undirected.
 
 •	**Strongly Connected Components**: nx.strongly_connected_components(G)
 
-o	Identifies components in a directed graph where nodes are mutually reachable.
+  - Identifies components in a directed graph where nodes are mutually reachable.
 
 •	**Average Shortest Path Length**: nx.average_shortest_path_length(subgraph)
 
-o	Computes the average of the shortest paths between all pairs of nodes in the subgraph.
+   - Computes the average of the shortest paths between all pairs of nodes in the subgraph.
 
 •	**Network Diameter**: nx.diameter(subgraph)
 
-o	Computes the longest shortest path in the subgraph.
+  - Computes the longest shortest path in the subgraph.
 
 •	**Node Degree**: G.degree(node)
 
-o	Computes the number of edges connected to a node.
+  - Computes the number of edges connected to a node.
 
 ## Summary of Methods
 
@@ -295,32 +311,33 @@ The analysis uses the following network analysis methods:
 3.	Component Analysis: Identifying weakly and strongly connected components.
 4.	Path-Based Metrics: Calculating average path length and diameter.
 5.	Visualization: Comparing network properties before and after node removal.
+   
  
 ## Method Applied in Research Ǫuestion 2 
 Analyze the Relationship Between Sales Rank and Connectivity – Investigate the correlation between a product’s degree centrality and its Sales Rank to understand if highly connected products perform better in sales.
 
-## Graph Construction
-•	**Method**: A directed graph (DiGraph) is constructed from the dataset.
+### Graph Construction
+•	**Method**: A directed graph ```(DiGraph)``` is constructed from the dataset.
 
 •	**Technique**:
 
-o	The graph is built using the FromNodeId and ToNodeId columns from the dataset.
+  - The graph is built using the ```FromNodeId``` and ```ToNodeId``` columns from the dataset.
 
-o	The nx.from_pandas_edgelist function is used to efficiently create the graph from a pandas DataFrame.
+  - The ```nx.from_pandas_edgelist``` function is used to efficiently create the graph from a pandas DataFrame.
 
-## Centrality Measures Calculation
+### Centrality Measures Calculation
 
 Centrality measures are computed to quantify the importance or influence of nodes in the network. The following centrality measures are calculated:
 
-## a.	**Degree Centrality**
+### a.	**Degree Centrality**
 
 •	**Method**: Measures the number of connections a node has.
 
 •	**Technique**:
 
-o	Computed using nx.degree_centrality(G).
+  - Computed using ```nx.degree_centrality(G)```.
 
-o	Formula: Degree Centrality=Number of connectionsTotal possible connectio nsDegree Centrality=Total possible connectionsNumber of connections.
+  -  Formula: Degree Centrality=Number of connectionsTotal possible connectio nsDegree Centrality=Total possible connectionsNumber of connections.
 
 ### b.	**Betweenness Centrality**
 
@@ -328,9 +345,9 @@ o	Formula: Degree Centrality=Number of connectionsTotal possible connectio nsDeg
 
 •	**Technique**:
 
-o	Computed using nx.betweenness_centrality(G, k=500).
+   -  Computed using ```nx.betweenness_centrality(G, k=500)```.
 
-o	The k=500 parameter is used to approximate the centrality for large networks by sampling 500 nodes.
+  - The k=500 parameter is used to approximate the centrality for large networks by sampling 500 nodes.
 
 ### c.	**PageRank**
  
@@ -338,9 +355,9 @@ o	The k=500 parameter is used to approximate the centrality for large networks b
 
 •	**Technique**:
 
-o	Computed using nx.pagerank(G, alpha=0.85).
+   - Computed using ```nx.pagerank(G, alpha=0.85)```.
 
-o	The alpha parameter controls the damping factor (probability of random jumps in the network).
+  - The alpha parameter controls the damping factor (probability of random jumps in the network).
 
 ## Data Merging
 
@@ -348,9 +365,9 @@ o	The alpha parameter controls the damping factor (probability of random jumps i
 
 •	**Technique**:
 
-o	A DataFrame is created for centrality measures using pd.DataFrame.
+  -  A DataFrame is created for centrality measures using pd.DataFrame.
 
-o	The centrality measures are merged with the original dataset using df.merge().
+  -  The centrality measures are merged with the original dataset using ```df.merge()```.
 
 ## Correlation Analysis
 
@@ -362,9 +379,9 @@ The relationship between Sales Rank and Degree Centrality is analyzed using two 
 
 •	**Technique**:
 
-o	Computed using spearmanr(df_merged["SalesRank"], df_merged["DegreeCentrality"]).
+  -  Computed using ```spearmanr(df_merged["SalesRank"]```, ```df_merged["DegreeCentrality"])```.
 
-o	Spearman correlation is non-parametric and assesses how well the relationship between two variables can be described by a monotonic function.
+  -  Spearman correlation is non-parametric and assesses how well the relationship between two variables can be described by a monotonic function.
 
 ### b.	Pearson Correlation
 
@@ -372,41 +389,41 @@ o	Spearman correlation is non-parametric and assesses how well the relationship 
 
 •	**Technique**:
 
-o	Computed using pearsonr(df_merged["SalesRank"], df_merged["DegreeCentrality"]).
+  -  Computed using ```pearsonr(df_merged["SalesRank"]```, ```df_merged["DegreeCentrality"])```.
 
-o	Pearson correlation is parametric and assumes a linear relationship between the variables.
+  - Pearson correlation is parametric and assumes a linear relationship between the variables.
 
 ## Visualization
-## •	Method: 
+### •	Method: 
 A scatter plot is used to visualize the relationship between Sales Rank and Degree Centrality.
 
-## •	Technique:
+### •	Technique:
 
-o	The scatter plot is created using sns.scatterplot() from the Seaborn library.
-o	The x-axis represents Degree Centrality, and the y-axis represents Sales Rank.
-o	The plot includes transparency (alpha=0.5) to handle overlapping data points.
+o	The scatter plot is created using ```sns.scatterplot()``` from the Seaborn library.
+o	The x-axis represents Degree Centrality, and the ```y-axis``` represents Sales Rank.
+o	The plot includes transparency ```(alpha=0.5)``` to handle overlapping data points.
 
 ## Key Algorithms and Functions Used
-•	**Graph Construction**:
+- **Graph Construction**:
 
-o	nx.from_pandas_edgelist(): Efficiently constructs a graph from a pandas DataFrame.
+- nx.from_pandas_edgelist(): Efficiently constructs a graph from a pandas DataFrame.
 
-•	**Centrality Measures**:
+- **Centrality Measures**:
 
-o	nx.degree_centrality(): Computes degree centrality.
+ - nx.degree_centrality(): Computes degree centrality.
 
-o	nx.betweenness_centrality(): Computes betweenness centrality (with approximation for large networks).
+ - nx.betweenness_centrality(): Computes betweenness centrality (with approximation for large networks).
 
-o	nx.pagerank(): Computes PageRank centrality.
+ - nx.pagerank(): Computes PageRank centrality.
 
 ## Correlation Analysis:
 
-o	spearmanr(): Computes Spearman correlation.
-o	pearsonr(): Computes Pearson correlation.
+  - spearmanr(): Computes Spearman correlation.
+  - pearsonr(): Computes Pearson correlation.
 
-•	**Visualization**:
+- **Visualization**:
  
-o	sns.scatterplot(): Creates a scatter plot for visualizing relationships.
+  - sns.scatterplot(): Creates a scatter plot for visualizing relationships.
 
 ## Summary of Methods
 The analysis uses the following methods:
@@ -417,55 +434,55 @@ The analysis uses the following methods:
 5.	Visualization: Creating a scatter plot to visually explore the relationship between Sales Rank and Degree Centrality.
 
 ## Strengths of the Methods
-•	Comprehensive Centrality Analysis: Multiple centrality measures are computed to capture different aspects of node importance.
+- Comprehensive Centrality Analysis: Multiple centrality measures are computed to capture different aspects of node importance.
 
-•	Robust Correlation Analysis: To understand the relationship, rank-based (Spearman) and linear (Pearson) correlations are used.
+- Robust Correlation Analysis: To understand the relationship, rank-based (Spearman) and linear (Pearson) correlations are used.
 
-•	Effective Visualization: The scatter plot provides a clear visual representation of the distribution and trends.
+- Effective Visualization: The scatter plot provides a clear visual representation of the distribution and trends.
 
 
- ### Method Applied in Research Ǫuestion 3 
+ ## Method Applied in Research Ǫuestion 3 
  Detect Key Bridge Products – Compute betweenness centrality to identify the top 10 products that act as intermediaries, bridging different product categories.
  
-## Graph Construction
-•	**Method**: A directed graph (DiGraph) is constructed from the dataset.
-•	**Technique**:
-o	The graph is built using the FromNodeId and ToNodeId columns from the dataset.
+### Graph Construction
+- **Method**: A directed graph ```(DiGraph)``` is constructed from the dataset.
+- **Technique**:
+  - The graph is built using the ```FromNodeId``` and ```ToNodeId``` columns from the dataset.
  
-o	The G.add_edges_from(df) function is used to efficiently add edges to the graph.
+  - The ```G.add_edges_from(df)``` function is used to efficiently add edges to the graph.
 
-##	Betweenness Centrality Calculation
-•	**Method**: Betweenness Centrality is computed to identify bridge products.
-•	**Technique**:
-o	Computed using nx.betweenness_centrality(G, k=500).
-o	The k=500 parameter is used to approximate the centrality for large networks by sampling 500 nodes.
-o	Betweenness Centrality measures the extent to which a node lies on the shortest paths between other nodes, making it a key metric for identifying bridge products.
+###  Betweenness Centrality Calculation
+- **Method**: Betweenness Centrality is computed to identify bridge products.
+- **Technique**:
+   - Computed using ```nx.betweenness_centrality(G, k=500)```.
+   -  The k=500 parameter is used to approximate the centrality for large networks by sampling 500 nodes.
+   -  Betweenness Centrality measures the extent to which a node lies on the shortest paths between other nodes, making it a key metric for identifying bridge products.
 
 ## Top 10 Bridge Products Identification
-•	**Method**: The top 10 nodes with the highest Betweenness Centrality are identified.
-•	**Technique**:
-o	The centrality values are sorted in descending orderusing sorted(betweenness_centrality.items(), key=lambda x: x[1], reverse=True)[:10].
-o	The top 10 nodes are extracted and stored in a DataFrame for visualization.
+- **Method**: The top 10 nodes with the highest Betweenness Centrality are identified.
+- **Technique**:
+  - The centrality values are sorted in descending order using ```sorted(betweenness_centrality.items()```, ```key=lambda x: x[1], reverse=True)[:10]```.
+ - The top 10 nodes are extracted and stored in a DataFrame for visualization.
 
 ## Data Visualization
-•	**Method**: A bar plot is used to visualize the Betweenness Centrality of the top 10 bridge products.
-•	**Technique**:
-o	The bar plot is created using sns.barplot() from the Seaborn library.
-o	The x-axis represents the Product Node ID, and the y-axis represents the Betweenness Centrality.
-o	The plot includes color coding (palette="viridis") and disables the legend for clarity.
+- **Method**: A bar plot is used to visualize the Betweenness Centrality of the top 10 bridge products.
+- **Technique**:
+  - The bar plot is created using ```sns.barplot()``` from the Seaborn library.
+  - The ```x-axis``` represents the Product Node ID, and the ```y-axis``` represents the Betweenness Centrality.
+  - The plot includes color coding (palette="viridis") and disables the legend for clarity.
 
 ### Key Algorithms and Functions Used
-•	**Graph Construction**:
-o	nx.DiGraph(): Creates a directed graph.
-o	G.add_edges_from(): Adds edges to the graph from a list of tuples.
-•	**Betweenness Centrality**:
-o	nx.betweenness_centrality(): Computes Betweenness Centrality for all nodes in the graph.
-o	The k=500 parameter is used to approximate the centrality for large networks.
-•	**Sorting and Filtering**:
-o	sorted(): Sorts the centrality values in descending order.
-o	List slicing ([:10]): Extracts the top 10 nodes.
-•	**Data Visualization**:
-o	sns.barplot(): Creates a bar plot for visualizing the top 10 bridge products.
+- **Graph Construction**:
+   - **nx.DiGraph()**: Creates a directed graph.
+  -  **G.add_edges_from()**: Adds edges to the graph from a list of tuples.
+- **Betweenness Centrality**:
+  - **nx.betweenness_centrality()**: Computes Betweenness Centrality for all nodes in the graph.
+  - The k=500 parameter is used to approximate the centrality for large networks.
+- **Sorting and Filtering**:
+   - **sorted()**: Sorts the centrality values in descending order.
+   - **List slicing ([:10])**: Extracts the top 10 nodes.
+- **Data Visualization**:
+  - **sns.barplot()**: Creates a bar plot for visualizing the top 10 bridge products.
 
 ## Summary of Methods
 The analysis uses the following methods:
@@ -491,6 +508,96 @@ a.	The nx.spring_layout function is used to position the nodes visually appealin
 
 8.	Legend:
 a.	A legend is added to distinguish between the top 10 bridge products and their connected products.
+
+##  Research Question 4: Which Web Pages Have No Outgoing or Incoming Links?
+
+###  1. Graph Construction
+- **Method**: A directed graph (DiGraph) is constructed.
+- **Technique**:
+  - Built using `FromNodeId` and `ToNodeId` columns.
+  - `G.add_edges_from()` is used to add edges.
+
+###  2. Identifying Broken Links & Orphan Pages
+- **Broken Links**: Nodes with no outgoing edges.
+  ```python
+  broken_links = nodes - set(out_degree.index)
+
+- Orphan Pages: Nodes with no incoming edges.
+```
+orphan_pages = nodes - set(in_degree.index)
+```
+- Tool: ```groupby()``` in pandas for degree calculation.
+
+###  3. Subgraph Sampling
+Method: Random sampling of 500 nodes.
+
+Technique:
+```
+sample_nodes = set(random.sample(list(nodes), min(500, len(nodes))))
+subgraph = G.subgraph(sample_nodes)
+```
+4. Visualization
+Bar Chart:
+
+Used ```plt.bar()``` to show counts of broken links and orphan pages.
+
+Network Graph:
+
+- ```nx.spring_layout()``` for layout
+
+- ```nx.draw_networkx_edges()``` and ```ax.scatter()``` to highlight:
+
+    - Red = Broken Links
+
+    - Blue = Orphan Pages
+
+### 5. Key Algorithms & Functions
+Graph: ```nx.DiGraph()```, ```G.add_edges_from()```
+
+Degrees: ```df.groupby().size()```
+
+Sets: ```set()``` to identify broken/orphan pages
+
+Sampling: ```random.sample()```, ```G.subgraph()```
+
+Visuals: ```plt.bar()```, ```nx.spring_layout()```, ```ax.scatter()```
+
+### 6. Summary of Methods
+- Graph construction from edge list.
+
+- Degree analysis for link classification.
+
+- Random subgraph sampling.
+
+- Visuals via bar and network graph.
+
+### 7. Strengths
+Efficient degree calculation with ```groupby()```.
+
+Scalable visual approach using subgraphs.
+
+Clear insight into network structure.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
