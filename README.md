@@ -1488,6 +1488,7 @@ This network analysis of Amazon’s **co-purchasing product data** provided key 
 By integrating richer product attributes, enhancing structural robustness, and refining strategies, businesses can significantly **boost their recommendation systems** and **sales outcomes** in e-commerce environments.
 
 
+📁 [Link to Codes](https://drive.google.com/file/d/11CrJvKC4A0u9ri5WGJt1tIU74EqX6TVR/view?usp=sharing)
 
 
 
