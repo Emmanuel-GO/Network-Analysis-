@@ -934,10 +934,104 @@ The strength of the relationship is quantified using **Spearman** and **Pearson 
 
 ---
 
+![](Salesranked.png)
+
+---
+
+### 📌 Interpretation
+
+- The **negative correlations** suggest that products with **higher connectivity** in the network tend to have **better sales performance** (lower Sales Rank).
+- The **Spearman correlation** is **stronger** than the Pearson correlation, indicating that the relationship is **better captured by rank-based measures** rather than linear ones.
+
+---
+
+### 📉 Scatter Plot (Sales Rank vs. Degree Centrality)
+
+- The scatter plot shows the **distribution of Sales Rank against Degree Centrality**.
+- Most data points are **clustered at lower values** of Degree Centrality, with a few **outliers at higher values**.
+- A **trend line** (if included) would show a **downward slope**, aligning with the observed **negative correlation**.
+
+---
+
+### 🧠 Discussion
+
+#### 1. Implications of Degree Centrality
+
+- Products with higher Degree Centrality are **more connected**, potentially indicating **greater visibility or popularity**.
+- The **negative correlation** with Sales Rank suggests that **highly connected products** tend to perform **better in sales**.
+
+#### 2. Strengths of the Analysis
+
+- Combining **Spearman and Pearson correlations** offers a **robust understanding** of the relationship.
+- The **scatter plot** provides a clear **visualization** of data distribution and trend.
+
+#### 3. Potential Confounding Factors
+
+- Factors such as **product category**, **pricing**, or **marketing strategies** may influence both **Sales Rank** and **Degree Centrality**.
+
+---
+
+### 💡 Recommendations
+
+#### 1. Further Analysis
+
+- Explore the relationship between Sales Rank and other centrality measures like **Betweenness Centrality** and **PageRank**.
+- Conduct **multivariate analysis** to control for confounding variables (e.g., category, price).
+
+#### 2. Visualization Enhancements
+
+- Include a **trend line or regression line** in the scatter plot to highlight the correlation.
+- Apply **log transformations or scales** to improve visualization clarity.
+
+#### 3. Causal Inference
+
+- Perform **controlled experiments** or use **causal inference techniques** to test whether increasing a product's centrality leads to improved sales.
+
+---
+
+### 🧾 Conclusion
+
+This analysis shows a **moderate negative correlation** between **Sales Rank** and **Degree Centrality**, suggesting that products with more connections in the network tend to perform better in terms of sales.
+
+- **Spearman correlation**: `-0.5557` (stronger, rank-based)
+- **Pearson correlation**: `-0.2872` (weaker, linear)
+
+The **scatter plot confirms** this trend, with most points concentrated at lower centrality values and few outliers at the higher end.
 
 
 
+## 🔍 Which Web Pages Have No Outgoing or Incoming Links?
 
+###  Introduction
+
+This report analyzes the presence of **broken links** and **orphan pages** in a directed network derived from the `amazon_network_data.csv` dataset.
+
+- **Broken links** are nodes with **zero out-degree** (i.e., no outgoing edges).
+- **Orphan pages** are nodes with **zero in-degree** (i.e., no incoming edges).
+
+The goal is to identify such nodes, visualize their distribution in a **sampled subgraph**, and explain the **impact on network structure**.
+
+---
+
+###  Methodology
+
+1. **Graph Construction**
+   - A **directed graph (DiGraph)** was constructed using the edge data from the dataset.
+
+2. **Definitions**
+   - **Broken Links**: Nodes with **zero out-degree**.
+   - **Orphan Pages**: Nodes with **zero in-degree**.
+
+3. **Subgraph Sampling**
+   - A **random sample of 500 nodes** was selected to create a **subgraph** for clearer visualization and manageable analysis.
+
+4. **Visualization**
+   - A **bar chart** compared the count of **broken links** and **orphan pages** in the subgraph.
+   - A **network graph** visualized the subgraph:
+     - **Broken links** were colored **red**.
+     - **Orphan pages** were colored **blue**.
+
+---
 
 
 
