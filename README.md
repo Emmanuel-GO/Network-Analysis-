@@ -1032,8 +1032,7 @@ The goal is to identify such nodes, visualize their distribution in a **sampled 
      - **Orphan pages** were colored **blue**.
 
 ---
-
-![](Double.png)
+![](Double .png)
 
 ---
 ### 📊 Findings
@@ -1356,9 +1355,63 @@ This report analyzes the *SalesRank* differences between similar products and vi
 * A **histogram** is used to visualize the distribution of *SalesRank* differences.
 * A **network graph** is used to visualize the product similarity network.
 
+---
+![](prosim.png)
 
+---
 
+## Findings
 
+### 1. SalesRank Differences:
+* The distribution of *SalesRank* differences between similar products is visualized in a **histogram**.
+* The histogram shows that **most differences are concentrated in the lower range (0 to 1.5)**, indicating that similar products tend to have relatively close SalesRank values.
+* The **tail of the distribution** extends to higher differences, suggesting that some similar products have significantly different sales performance.
+
+### 2. Correlation Analysis:
+* **Spearman Correlation**: 0.0074  
+* **Pearson Correlation**: -0.0034  
+
+**Interpretation:**
+* Both correlations are **close to zero**, indicating no significant relationship between *SalesRank* differences and their order in the dataset.
+* This suggests that the *SalesRank* differences between similar products are **not influenced by their position** in the dataset.
+
+### 3. Product Similarity Network:
+* The **network graph** visualizes the connections between products based on similarity.
+* A **subgraph of 500 nodes** reveals a **dense network** of connections, indicating that many products are linked through similarity.
+* The network structure suggests that products within the same **category** or with **similar attributes** are highly interconnected.
+
+---
+
+## Discussion
+
+### 1. SalesRank Differences:
+* The **concentration of differences in the lower range** suggests that similar products tend to have **comparable sales performance**.
+* The **presence of higher differences** in the tail of the distribution indicates that some similar products may have **significantly different sales performance**, possibly due to factors such as **pricing, reviews, or marketing**.
+
+### 2. Correlation Analysis:
+* The **near-zero correlations** suggest that the *SalesRank* differences between similar products are **not influenced by their dataset position**.
+* This reinforces the idea that *SalesRank* differences are **driven by other factors**, such as **product attributes** or **customer preferences**.
+
+### 3. Product Similarity Network:
+* The **dense network of connections** indicates that Amazon's **recommendation system** effectively links similar products.
+* The **high interconnectivity** within product categories suggests that customers often explore **related products** within the same category.
+
+---
+
+## Recommendations
+
+### 1. Further Analysis:
+* Investigate the relationship between *SalesRank differences* and other metrics (e.g., **price, reviews, product category**).
+* Perform a **temporal analysis** to understand how *SalesRank* differences and product similarity **evolve over time**.
+
+### 2. Marketing Strategies:
+* Use the **product similarity network** to improve **cross-selling** and **up-selling** strategies.
+* Focus on products with **significant SalesRank differences** to understand the **factors driving their sales performance**.
+
+---
+
+## Conclusion
+The analysis reveals that **similar products tend to have relatively close SalesRank values**, with some exceptions showing significant differences. The **near-zero correlations** indicate that *SalesRank* differences are not influenced by the **order of products** in the dataset. The **product similarity network** shows a **dense web of connections**, highlighting the effectiveness of Amazon’s recommendation system. Further **analysis and data enrichment** are recommended to deepen the understanding of these findings.
 
 
 
