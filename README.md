@@ -1033,9 +1033,159 @@ The goal is to identify such nodes, visualize their distribution in a **sampled 
 
 ---
 
+![](Double.png)
+
+---
+### 📊 Findings
+
+#### 1. Summary Statistics
+- **Total Nodes**: 334,852  
+- **Broken Links**: 69,075 (~20.6%)  
+- **Orphan Pages**: 70,712 (~21.1%)
+
+#### 📌 Interpretation
+- Roughly **1 in 5** nodes are either broken or orphaned.
+- These represent:
+  - 🚫 **Dead ends** in navigation (broken links)
+  - ❌ **Isolated entries** with no backlinks (orphan pages)
+
+#### 2. Subgraph Analysis (500 Nodes)
+- **Broken Links**: 100  
+- **Orphan Pages**: 80  
+
+#### 📈 Visualization
+- **Bar Chart**: Highlights relative counts of broken vs orphan nodes.
+- **Network Graph**: Clearly shows red (broken) and blue (orphan) nodes.
+
+---
+
+### 💬 Discussion
+
+#### 1. Broken Links
+- Nodes with no outgoing connections.
+- Represent **navigational dead ends**.
+- Can hinder **recommendation flow** and **user journey**.
+
+#### 2. Orphan Pages
+- Nodes with no incoming edges.
+- Suggest **underutilized** or **undiscovered** content.
+- May be overlooked in recommendation systems.
+
+#### 3. Why Use a Subgraph?
+- **Scalability**: Entire graph is too large (334k+ nodes).
+- **Focus**: Allows detailed examination of a smaller, meaningful sample.
+- **Efficiency**: Saves computation time and system resources.
+- **Interpretability**: Easier to derive insights from a smaller set.
+
+#### 4. Limitations
+- **Sampling Bias**: A 500-node sample may not fully reflect the whole graph.
+- **Graph Directionality**: Some relationships might be underrepresented compared to an undirected view.
+
+---
+
+### ✅ Recommendations
+
+#### 1. Further Analysis
+- Correlate broken links and orphan pages with:
+  - 📈 **Sales Rank**
+  - 🔁 **PageRank**
+- Explore **temporal dynamics**: How do these issues evolve over time?
+
+#### 2. Network Optimization
+- 🔗 **Fix broken links** by connecting them to relevant nodes.
+- 🌐 **Revive orphan pages** by linking them from other products/pages.
+
+---
+
+### 🧠 Conclusion
+
+- Identified **69,075 broken links** and **70,712 orphan pages** (~20% each).
+- These nodes may indicate **inefficiencies** or **missed opportunities** in the product recommendation system.
+- The use of a **500-node subgraph** was essential for:
+  - Scalability
+  - Efficiency
+  - Clarity of insight
+
+---
+
+### 💡 Why Using a Subgraph Was Better
+
+1. **Scalability**: The full graph is too large for practical visualization.
+2. **Focus**: A subgraph captures essential features without overwhelming detail.
+3. **Efficiency**: Reduces memory and processing demand.
+4. **Interpretability**: Easier to draw conclusions from a smaller sample.
+
+By leveraging a subgraph, this analysis strikes a balance between **depth of insight** and **computational feasibility**, making it a smart choice for large-scale network exploration.
 
 
+## 🔗 Detecting Key Bridge Products in the Amazon Network
 
+### 🧾 Introduction
+
+This report identifies and analyzes the **top 10 bridge products** in the Amazon product co-purchasing network using **Betweenness Centrality**. Bridge products are key intermediaries in the network that lie on the **shortest paths between other nodes**, making them crucial for connectivity, recommendation flow, and product discovery.
+
+---
+
+### 🧪 Methodology
+
+1. **Dataset**
+   - Used `amazon_network_data.csv`, which contains directed edges between products represented by `FromNodeId` and `ToNodeId`.
+
+2. **Graph Construction**
+   - A **directed graph (DiGraph)** was constructed using `networkx`.
+
+3. **Betweenness Centrality Calculation**
+   - Computed with `nx.betweenness_centrality(G, k=500)` to **approximate** centrality due to the graph's large size.
+   - The parameter `k=500` specifies a random sample of 500 nodes for efficiency.
+
+4. **Selection of Top Products**
+   - The **top 10 nodes** with the **highest Betweenness Centrality** were extracted.
+   - A **bar plot** was used for visualization.
+
+---
+
+### 📊 Findings
+
+#### 🏆 Top 10 Bridge Products
+
+| NodeId | Betweenness Centrality |
+|--------|------------------------|
+| 86976  | 0.000004               |
+| 239327 | 0.000003               |
+| 180995 | 0.000003               |
+| 233522 | 0.000003               |
+| 277567 | 0.000003               |
+| 227994 | 0.000003               |
+| 219958 | 0.000003               |
+| 260536 | 0.000003               |
+| 360318 | 0.000002               |
+| 120937 | 0.000002               |
+
+#### 🔍 Interpretation
+
+- These products lie on a **large number of shortest paths**, enabling them to act as **information and recommendation hubs**.
+- **Node 86976** has the highest Betweenness Centrality (0.000004), indicating it plays the most pivotal role in **bridging different parts of the network**.
+- While the centrality values are low due to the network's size, the relative ranking still reveals **key influencers**.
+
+---
+
+### 💬 Conclusion
+
+This analysis highlights the top 10 **bridge products** in the Amazon co-purchasing network using Betweenness Centrality. These nodes act as **connectors between different product clusters**, making them ideal candidates for:
+
+- **Product promotion**
+- **Cross-category recommendations**
+- **Network robustness analysis**
+
+Further exploration could include mapping these node IDs to actual product names or categories to draw **business-driven insights**.
+
+---
+
+### 📈 Next Steps
+
+- **Map Node IDs to Product Metadata** (titles, categories) to understand what makes these products influential.
+- **Explore correlations** between Betweenness Centrality and metrics like **Sales Rank** or **PageRank**.
+- **Visualize** these top bridge products in a focused subgraph to study their connectivity in detail.
 
 
 
